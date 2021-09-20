@@ -15,10 +15,10 @@ class NeonCircularTimer extends StatefulWidget {
   final Gradient fillGradient;
 
   /// Ring Color for Countdown Widget.
-  final Color ringColor;
+  final Color neonColor;
 
   /// Ring Gradient for Countdown Widget.
-  final Gradient ringGradient;
+  final Gradient neonGradient;
 
   /// Background Color for Countdown Widget.
   final Color outerStrokeColor;
@@ -40,9 +40,6 @@ class NeonCircularTimer extends StatefulWidget {
 
   /// Width of the Countdown Widget.
   final double width;
-
-  /// Height of the Countdown Widget.
-  final double height;
 
   /// Border Thickness of the Countdown Ring.
   final double strokeWidth;
@@ -73,13 +70,12 @@ class NeonCircularTimer extends StatefulWidget {
 
   NeonCircularTimer(
       {@required this.width,
-      @required this.height,
       @required this.duration,
       @required this.fillColor,
-      @required this.ringColor,
+      @required this.neonColor,
       this.outerStrokeColor,
       this.fillGradient,
-      this.ringGradient,
+      this.neonGradient,
       this.backgroundGradient,
       this.initialDuration = 0,
       this.isReverse = false,
@@ -95,11 +91,10 @@ class NeonCircularTimer extends StatefulWidget {
       this.textFormat,
       this.controller})
       : assert(width != null),
-        assert(height != null),
         assert(duration != null),
         assert(initialDuration <= duration),
-        assert(fillColor != null),
-        assert(ringColor != null),
+        assert(fillColor != null || fillGradient != null),
+        assert(neonColor != null || neonGradient != null),
         super(key: key);
 
   @override
@@ -244,7 +239,6 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
   Widget build(BuildContext context) {
     return Container(
       width: widget.width,
-      height: widget.height,
       child: AnimatedBuilder(
           animation: _controller,
           builder: (context, child) {
@@ -259,8 +253,8 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
                             animation: _countDownAnimation ?? _controller,
                             fillColor: widget.fillColor,
                             fillGradient: widget.fillGradient,
-                            ringColor: widget.ringColor,
-                            ringGradient: widget.ringGradient,
+                            neonColor: widget.neonColor,
+                            neonGradient: widget.neonGradient,
                             strokeWidth: widget.strokeWidth,
                             strokeCap: widget.strokeCap,
                             outerStrokeColor: widget.outerStrokeColor,

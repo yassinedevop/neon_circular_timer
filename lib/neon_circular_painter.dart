@@ -6,8 +6,8 @@ class CustomTimerPainter extends CustomPainter {
       {this.animation,
       this.fillColor,
       this.fillGradient,
-      this.ringColor,
-      this.ringGradient,
+      this.neonColor,
+      this.neonGradient,
       this.strokeWidth,
       this.strokeCap,
       this.outerStrokeColor,
@@ -15,21 +15,21 @@ class CustomTimerPainter extends CustomPainter {
       : super(repaint: animation);
 
   final Animation<double> animation;
-  final Color fillColor, ringColor, outerStrokeColor;
+  final Color fillColor, neonColor, outerStrokeColor;
   final double strokeWidth;
   final StrokeCap strokeCap;
-  final Gradient fillGradient, ringGradient, backgroundGradient;
+  final Gradient fillGradient, neonGradient, backgroundGradient;
 
   @override
   void paint(Canvas canvas, Size size) {
     Paint blurPaint = Paint()
-      ..color = ringColor
+      ..color = neonColor
       ..strokeWidth = strokeWidth
       ..strokeCap = strokeCap
       ..maskFilter = MaskFilter.blur(BlurStyle.outer, 5)
       ..style = PaintingStyle.stroke;
     Paint strokePaint = Paint()
-      ..color = ringColor.withOpacity(0.8)
+      ..color = neonColor.withOpacity(0.8)
       ..strokeWidth = strokeWidth
       ..strokeCap = strokeCap
       ..style = PaintingStyle.stroke;
@@ -45,10 +45,10 @@ class CustomTimerPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..maskFilter = MaskFilter.blur(BlurStyle.inner, 4);
 
-    if (ringGradient != null) {
+    if (neonGradient != null) {
       final rect = Rect.fromCircle(
           center: size.center(Offset.zero), radius: size.width / 2);
-      blurPaint..shader = ringGradient.createShader(rect);
+      blurPaint..shader = neonGradient.createShader(rect);
     } else {
       blurPaint..shader = null;
     }
@@ -90,7 +90,7 @@ class CustomTimerPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomTimerPainter old) {
     return animation.value != old.animation.value ||
-        ringColor != old.ringColor ||
+        neonColor != old.neonColor ||
         fillColor != old.fillColor;
   }
 }

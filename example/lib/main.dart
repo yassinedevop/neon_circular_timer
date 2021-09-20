@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
           body: Center(
             child: NeonCircularTimer(
                 width: 200,
-                height: 200,
                 duration: 10,
                 strokeWidth: 10,
                 outerStrokeColor: Colors.grey.shade100,
@@ -24,13 +23,13 @@ class MyApp extends StatelessWidget {
                   Colors.greenAccent.shade200,
                   Colors.blueAccent.shade400
                 ]),
-                ringGradient: LinearGradient(colors: [
+                neonGradient: LinearGradient(colors: [
                   Colors.greenAccent.shade200,
                   Colors.blueAccent.shade400
                 ]),
                 strokeCap: StrokeCap.round,
                 fillColor: Colors.black12,
-                ringColor: Colors.blue.shade900),
+                neonColor: Colors.blue.shade900),
           ),
         ));
   }
