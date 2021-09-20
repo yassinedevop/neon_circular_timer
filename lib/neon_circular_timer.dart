@@ -90,13 +90,13 @@ class NeonCircularTimer extends StatefulWidget {
       this.autoStart = true,
       this.textFormat,
       this.controller})
-        :super(key: key);
-      // : assert(width != null),
-      //   assert(duration != null),
-      //   assert(initialDuration <= duration),
-      //   assert(fillColor != null || fillGradient != null),
-      //   assert(neonColor != null || neonGradient != null),
-      //   assert(outerStrokeColor != null || outerStrokeGradient != null),
+      : super(key: key);
+  // : assert(width != null),
+  //   assert(duration != null),
+  //   assert(initialDuration <= duration),
+  //   assert(fillColor != null || fillGradient != null),
+  //   assert(neonColor != null || neonGradient != null),
+  //   assert(outerStrokeColor != null || outerStrokeGradient != null),
 
   @override
   NeonCircularTimerState createState() => NeonCircularTimerState();
@@ -301,7 +301,8 @@ class CountDownController {
   void start() {
     if (_isReverse) {
       _state._controller?.reverse(
-          from: _initialDuration == 0 ? 1 : 1 - (_initialDuration! / _duration!));
+          from:
+              _initialDuration == 0 ? 1 : 1 - (_initialDuration! / _duration!));
     } else {
       _state._controller?.forward(
           from: _initialDuration == 0 ? 0 : (_initialDuration! / _duration!));

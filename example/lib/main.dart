@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
                 width: 200,
                 duration: 10,
                 strokeWidth: 10,
-              
                 outerStrokeColor: Colors.grey.shade100,
                 fillGradient: LinearGradient(colors: [
                   Colors.greenAccent.shade200,
