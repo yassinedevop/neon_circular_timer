@@ -4,6 +4,8 @@ import 'dart:math' as math;
 class CustomTimerPainter extends CustomPainter {
   CustomTimerPainter(
       {this.animation,
+      this.neumorphicEffect = true,
+      this.backgroundColor,
       this.fillColor,
       this.fillGradient,
       this.neonColor,
@@ -12,10 +14,13 @@ class CustomTimerPainter extends CustomPainter {
       this.strokeCap,
       this.outerStrokeColor,
       this.outerStrokeGradient})
-      : super(repaint: animation);
+      : assert((neumorphicEffect && backgroundColor != null) ||
+            !neumorphicEffect && backgroundColor == null),
+        super(repaint: animation);
 
   final Animation<double>? animation;
-  final Color? fillColor, neonColor, outerStrokeColor;
+  final bool neumorphicEffect;
+  final Color? fillColor, neonColor, outerStrokeColor, backgroundColor;
   final double? strokeWidth;
   final StrokeCap? strokeCap;
   final Gradient? fillGradient, neonGradient, outerStrokeGradient;
@@ -33,17 +38,26 @@ class CustomTimerPainter extends CustomPainter {
       ..strokeWidth = strokeWidth!
       ..strokeCap = strokeCap!
       ..style = PaintingStyle.stroke;
-    Paint neumorphicPaint = Paint()
-      ..color = outerStrokeColor!
-      ..strokeWidth = strokeWidth! + 4
-      ..strokeCap = strokeCap!
-      ..style = PaintingStyle.stroke;
-    Paint innerPaint = Paint()
-      ..color = fillColor!
-      ..strokeWidth = strokeWidth!
-      ..strokeCap = strokeCap!
-      ..style = PaintingStyle.stroke
-      ..maskFilter = MaskFilter.blur(BlurStyle.inner, 4);
+
+    Paint neumorphicPaint = Paint();
+    Paint innerPaint = Paint();
+    Paint backgroundPaint = Paint();
+    if (neumorphicEffect) {
+      neumorphicPaint
+        ..color = outerStrokeColor!
+        ..strokeWidth = strokeWidth! + 4
+        ..strokeCap = strokeCap!
+        ..style = PaintingStyle.stroke;
+      innerPaint
+        ..color = fillColor!
+        ..strokeWidth = strokeWidth!
+        ..strokeCap = strokeCap!
+        ..style = PaintingStyle.stroke
+        ..maskFilter = MaskFilter.blur(BlurStyle.inner, 4);
+      backgroundPaint
+        ..color = backgroundColor!
+        ..style = PaintingStyle.fill;
+    }
 
     if (neonGradient != null) {
       final rect = Rect.fromCircle(
@@ -66,25 +80,19 @@ class CustomTimerPainter extends CustomPainter {
     Path path = Path();
 
     path.addArc(Offset.zero & size, math.pi * 1.5, progress);
-    canvas.drawPath(
-        Path()..addArc(Offset.zero & size, 0, math.pi * 2), neumorphicPaint);
-    canvas.drawPath(
-        Path()..addArc(Offset.zero & size, 0, math.pi * 2), innerPaint);
+
+    Path path_1 = Path()..addArc(Offset.zero & size, 0, math.pi * 2);
+    if (neumorphicEffect) {
+      canvas.drawShadow(path_1, Colors.black54, 2, true);
+      canvas.drawPath(path_1, neumorphicPaint);
+      canvas.drawPath(path_1, innerPaint);
+      canvas.drawCircle(Offset(size.width / 2, size.height / 2),
+          size.width / 2 - strokeWidth! + 2, backgroundPaint);
+    }
 
     canvas.drawPath(path, strokePaint);
     canvas.drawPath(path, blurPaint);
 
-    if (outerStrokeColor != null || outerStrokeGradient != null) {
-      final backgroundPaint = Paint();
-
-      if (outerStrokeGradient != null) {
-        final rect = Rect.fromCircle(
-            center: size.center(Offset.zero), radius: size.width / 2.2);
-        backgroundPaint..shader = outerStrokeGradient!.createShader(rect);
-      } else {
-        backgroundPaint.color = outerStrokeColor!;
-      }
-    }
   }
 
   @override

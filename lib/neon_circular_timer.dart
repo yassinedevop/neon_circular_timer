@@ -14,8 +14,11 @@ class NeonCircularTimer extends StatefulWidget {
   /// Filling Gradient for Countdown Widget.
   final Gradient? fillGradient;
 
+  /// Filling Color for Countdown circle.
+  final Color? backgroudColor;
+
   /// Ring Color for Countdown Widget.
-  final Color neonColor;
+  final Color? neonColor;
 
   /// Ring Gradient for Countdown Widget.
   final Gradient? neonGradient;
@@ -43,6 +46,9 @@ class NeonCircularTimer extends StatefulWidget {
 
   /// Border Thickness of the Countdown Ring.
   final double strokeWidth;
+
+  ///show neumorphicEffect true by default
+  final bool neumorphicEffect;
 
   /// Begin and end contours with a flat edge and no extension.
   final StrokeCap strokeCap;
@@ -89,14 +95,10 @@ class NeonCircularTimer extends StatefulWidget {
       this.isTimerTextShown = true,
       this.autoStart = true,
       this.textFormat,
-      this.controller})
+      this.controller,
+      this.backgroudColor,
+      this.neumorphicEffect = true})
       : super(key: key);
-  // : assert(width != null),
-  //   assert(duration != null),
-  //   assert(initialDuration <= duration),
-  //   assert(fillColor != null || fillGradient != null),
-  //   assert(neonColor != null || neonGradient != null),
-  //   assert(outerStrokeColor != null || outerStrokeGradient != null),
 
   @override
   NeonCircularTimerState createState() => NeonCircularTimerState();
@@ -251,6 +253,8 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
                     Positioned.fill(
                       child: CustomPaint(
                         painter: CustomTimerPainter(
+                            neumorphicEffect: widget.neumorphicEffect,
+                            backgroundColor: widget.backgroudColor,
                             animation: _countDownAnimation ?? _controller,
                             fillColor: widget.fillColor,
                             fillGradient: widget.fillGradient,
