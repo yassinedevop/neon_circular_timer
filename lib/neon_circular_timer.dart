@@ -6,31 +6,31 @@ import 'neon_circular_painter.dart';
 /// Create a Circular Countdown Timer.
 class NeonCircularTimer extends StatefulWidget {
   /// Key for Countdown Timer.
-  final Key key;
+  final Key? key;
 
   /// Filling Color for Countdown Widget.
   final Color fillColor;
 
   /// Filling Gradient for Countdown Widget.
-  final Gradient fillGradient;
+  final Gradient? fillGradient;
 
   /// Ring Color for Countdown Widget.
   final Color neonColor;
 
   /// Ring Gradient for Countdown Widget.
-  final Gradient neonGradient;
+  final Gradient? neonGradient;
 
   /// Background Color for Countdown Widget.
   final Color outerStrokeColor;
 
   /// Background Gradient for Countdown Widget.
-  final Gradient outerStrokeGradient;
+  final Gradient? outerStrokeGradient;
 
   /// This Callback will execute when the Countdown Ends.
-  final VoidCallback onComplete;
+  final VoidCallback? onComplete;
 
   /// This Callback will execute when the Countdown Starts.
-  final VoidCallback onStart;
+  final VoidCallback? onStart;
 
   /// Countdown duration in Seconds.
   final int duration;
@@ -48,10 +48,10 @@ class NeonCircularTimer extends StatefulWidget {
   final StrokeCap strokeCap;
 
   /// Text Style for Countdown Text.
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   /// Format for the Countdown Text.
-  final String textFormat;
+  final String? textFormat;
 
   /// Handles Countdown Timer (true for Reverse Countdown (max to 0), false for Forward Countdown (0 to max)).
   final bool isReverse;
@@ -63,17 +63,17 @@ class NeonCircularTimer extends StatefulWidget {
   final bool isTimerTextShown;
 
   /// Controls (i.e Start, Pause, Resume, Restart) the Countdown Timer.
-  final CountDownController controller;
+  final CountDownController? controller;
 
   /// Handles the timer start.
   final bool autoStart;
 
   NeonCircularTimer(
-      {@required this.width,
-      @required this.duration,
-      @required this.fillColor,
-      @required this.neonColor,
-      @required this.outerStrokeColor,
+      {required this.width,
+      required this.duration,
+      required this.fillColor,
+      required this.neonColor,
+      required this.outerStrokeColor,
       this.fillGradient,
       this.neonGradient,
       this.outerStrokeGradient,
@@ -90,13 +90,13 @@ class NeonCircularTimer extends StatefulWidget {
       this.autoStart = true,
       this.textFormat,
       this.controller})
-      : assert(width != null),
-        assert(duration != null),
-        assert(initialDuration <= duration),
-        assert(fillColor != null || fillGradient != null),
-        assert(neonColor != null || neonGradient != null),
-        assert(outerStrokeColor != null || outerStrokeGradient != null),
-        super(key: key);
+        :super(key: key);
+      // : assert(width != null),
+      //   assert(duration != null),
+      //   assert(initialDuration <= duration),
+      //   assert(fillColor != null || fillGradient != null),
+      //   assert(neonColor != null || neonGradient != null),
+      //   assert(outerStrokeColor != null || outerStrokeGradient != null),
 
   @override
   NeonCircularTimerState createState() => NeonCircularTimerState();
@@ -104,11 +104,11 @@ class NeonCircularTimer extends StatefulWidget {
 
 class NeonCircularTimerState extends State<NeonCircularTimer>
     with TickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _countDownAnimation;
+  AnimationController? _controller;
+  Animation<double>? _countDownAnimation;
 
   String get time {
-    if (widget.isReverse && _controller.isDismissed) {
+    if (widget.isReverse && _controller!.isDismissed) {
       if (widget.textFormat == CountdownTextFormat.MM_SS) {
         return "00:00";
       } else if (widget.textFormat == CountdownTextFormat.SS) {
@@ -119,7 +119,7 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
         return "00:00:00";
       }
     } else {
-      Duration duration = _controller.duration * _controller.value;
+      Duration duration = _controller!.duration! * _controller!.value;
       return _getTime(duration);
     }
   }
@@ -127,9 +127,9 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
   void _setAnimation() {
     if (widget.autoStart) {
       if (widget.isReverse) {
-        _controller.reverse(from: 1);
+        _controller!.reverse(from: 1);
       } else {
-        _controller.forward();
+        _controller!.forward();
       }
     }
   }
@@ -138,7 +138,7 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
     if ((!widget.isReverse && widget.isReverseAnimation) ||
         (widget.isReverse && !widget.isReverseAnimation)) {
       _countDownAnimation =
-          Tween<double>(begin: 1, end: 0).animate(_controller);
+          Tween<double>(begin: 1, end: 0).animate(_controller!);
     }
   }
 
@@ -192,11 +192,11 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
   }
 
   void _onStart() {
-    if (widget.onStart != null) widget.onStart();
+    if (widget.onStart != null) widget.onStart!();
   }
 
   void _onComplete() {
-    if (widget.onComplete != null) widget.onComplete();
+    if (widget.onComplete != null) widget.onComplete!();
   }
 
   @override
@@ -207,7 +207,7 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
       duration: Duration(seconds: widget.duration),
     );
 
-    _controller.addStatusListener((status) {
+    _controller!.addStatusListener((status) {
       switch (status) {
         case AnimationStatus.forward:
           _onStart();
@@ -241,7 +241,7 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
     return Container(
       width: widget.width,
       child: AnimatedBuilder(
-          animation: _controller,
+          animation: _controller!,
           builder: (context, child) {
             return Align(
               child: AspectRatio(
@@ -285,26 +285,26 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
 
   @override
   void dispose() {
-    _controller.stop();
-    _controller.dispose();
+    _controller!.stop();
+    _controller!.dispose();
     super.dispose();
   }
 }
 
 /// Controls (i.e Start, Pause, Resume, Restart) the Countdown Timer.
 class CountDownController {
-  NeonCircularTimerState _state;
-  bool _isReverse;
-  int _initialDuration, _duration;
+  late NeonCircularTimerState _state;
+  late bool _isReverse;
+  int? _initialDuration, _duration;
 
   /// This Method Starts the Countdown Timer
   void start() {
     if (_isReverse) {
       _state._controller?.reverse(
-          from: _initialDuration == 0 ? 1 : 1 - (_initialDuration / _duration));
+          from: _initialDuration == 0 ? 1 : 1 - (_initialDuration! / _duration!));
     } else {
       _state._controller?.forward(
-          from: _initialDuration == 0 ? 0 : (_initialDuration / _duration));
+          from: _initialDuration == 0 ? 0 : (_initialDuration! / _duration!));
     }
   }
 
@@ -316,17 +316,17 @@ class CountDownController {
   /// This Method Resumes the Countdown Timer
   void resume() {
     if (_isReverse) {
-      _state._controller?.reverse(from: _state._controller.value);
+      _state._controller?.reverse(from: _state._controller!.value);
     } else {
-      _state._controller?.forward(from: _state._controller.value);
+      _state._controller?.forward(from: _state._controller!.value);
     }
   }
 
   /// This Method Restarts the Countdown Timer,
   /// Here optional int parameter **duration** is the updated duration for countdown timer
-  void restart({int duration}) {
-    _state._controller.duration =
-        Duration(seconds: duration ?? _state._controller.duration.inSeconds);
+  void restart({int? duration}) {
+    _state._controller!.duration =
+        Duration(seconds: duration ?? _state._controller!.duration!.inSeconds);
     if (_isReverse) {
       _state._controller?.reverse(from: 1);
     } else {
@@ -338,7 +338,7 @@ class CountDownController {
   /// Time Used in terms of **Forward Countdown** and Time Left in terms of **Reverse Countdown**
   String getTime() {
     return _state
-        ._getTime(_state._controller.duration * _state._controller.value);
+        ._getTime(_state._controller!.duration! * _state._controller!.value);
   }
 }
 
