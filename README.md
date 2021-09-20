@@ -51,6 +51,7 @@ If you need to make a timer application with a fancy neon effect then this packa
 
 ### Preview
 
-<div style="width:100%;height:0;padding-bottom:178%;position:relative;"><img src="https://giphy.com/embed/MqRrJ8g2wjq15vaVil" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen/></div>
+![demo](https://media.giphy.com/media/MqRrJ8g2wjq15vaVil/giphy.gif?cid=790b7611a2d5ea480f7d8d4609f9fc16d42856dbd2107110&rid=giphy.gif "demo")
+
 
 
