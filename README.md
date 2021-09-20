@@ -3,6 +3,8 @@
 If you need to make a timer application with a fancy neon effect then this package is for you
 
 
+
+
 ### Usage
 
 <pre>
@@ -49,6 +51,4 @@ If you need to make a timer application with a fancy neon effect then this packa
 
 ### Preview
 
-![video](https://github.com/yassinedevop/neon_circular_timer/blob/master/preview.mp4 "video preview")
-
-
+![demo](https://media.giphy.com/media/MqRrJ8g2wjq15vaVil/giphy.gif?cid=790b7611a2d5ea480f7d8d4609f9fc16d42856dbd2107110&rid=giphy.gif "demo")
