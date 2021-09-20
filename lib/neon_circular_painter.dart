@@ -11,14 +11,14 @@ class CustomTimerPainter extends CustomPainter {
       this.strokeWidth,
       this.strokeCap,
       this.outerStrokeColor,
-      this.backgroundGradient})
+      this.outerStrokeGradient})
       : super(repaint: animation);
 
   final Animation<double> animation;
   final Color fillColor, neonColor, outerStrokeColor;
   final double strokeWidth;
   final StrokeCap strokeCap;
-  final Gradient fillGradient, neonGradient, backgroundGradient;
+  final Gradient fillGradient, neonGradient, outerStrokeGradient;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -74,13 +74,13 @@ class CustomTimerPainter extends CustomPainter {
     canvas.drawPath(path, strokePaint);
     canvas.drawPath(path, blurPaint);
 
-    if (outerStrokeColor != null || backgroundGradient != null) {
+    if (outerStrokeColor != null || outerStrokeGradient != null) {
       final backgroundPaint = Paint();
 
-      if (backgroundGradient != null) {
+      if (outerStrokeGradient != null) {
         final rect = Rect.fromCircle(
             center: size.center(Offset.zero), radius: size.width / 2.2);
-        backgroundPaint..shader = backgroundGradient.createShader(rect);
+        backgroundPaint..shader = outerStrokeGradient.createShader(rect);
       } else {
         backgroundPaint.color = outerStrokeColor;
       }

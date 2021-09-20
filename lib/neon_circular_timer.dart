@@ -24,7 +24,7 @@ class NeonCircularTimer extends StatefulWidget {
   final Color outerStrokeColor;
 
   /// Background Gradient for Countdown Widget.
-  final Gradient backgroundGradient;
+  final Gradient outerStrokeGradient;
 
   /// This Callback will execute when the Countdown Ends.
   final VoidCallback onComplete;
@@ -73,10 +73,10 @@ class NeonCircularTimer extends StatefulWidget {
       @required this.duration,
       @required this.fillColor,
       @required this.neonColor,
-      this.outerStrokeColor,
+      @required this.outerStrokeColor,
       this.fillGradient,
       this.neonGradient,
-      this.backgroundGradient,
+      this.outerStrokeGradient,
       this.initialDuration = 0,
       this.isReverse = false,
       this.isReverseAnimation = false,
@@ -95,6 +95,7 @@ class NeonCircularTimer extends StatefulWidget {
         assert(initialDuration <= duration),
         assert(fillColor != null || fillGradient != null),
         assert(neonColor != null || neonGradient != null),
+        assert(outerStrokeColor != null || outerStrokeGradient != null),
         super(key: key);
 
   @override
@@ -258,7 +259,7 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
                             strokeWidth: widget.strokeWidth,
                             strokeCap: widget.strokeCap,
                             outerStrokeColor: widget.outerStrokeColor,
-                            backgroundGradient: widget.backgroundGradient),
+                            outerStrokeGradient: widget.outerStrokeGradient),
                       ),
                     ),
                     widget.isTimerTextShown
