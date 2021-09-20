@@ -92,7 +92,6 @@ class CustomTimerPainter extends CustomPainter {
 
     canvas.drawPath(path, strokePaint);
     canvas.drawPath(path, blurPaint);
-
   }
 
   @override
