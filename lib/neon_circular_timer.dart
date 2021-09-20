@@ -51,7 +51,7 @@ class NeonCircularTimer extends StatefulWidget {
   final TextStyle? textStyle;
 
   /// Format for the Countdown Text.
-  final String? textFormat;
+  final TextFormat? textFormat;
 
   /// Handles Countdown Timer (true for Reverse Countdown (max to 0), false for Forward Countdown (0 to max)).
   final bool isReverse;
@@ -109,11 +109,11 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
 
   String get time {
     if (widget.isReverse && _controller!.isDismissed) {
-      if (widget.textFormat == CountdownTextFormat.MM_SS) {
+      if (widget.textFormat == TextFormat.MM_SS) {
         return "00:00";
-      } else if (widget.textFormat == CountdownTextFormat.SS) {
+      } else if (widget.textFormat == TextFormat.SS) {
         return "00";
-      } else if (widget.textFormat == CountdownTextFormat.S) {
+      } else if (widget.textFormat == TextFormat.S) {
         return "0";
       } else {
         return "00:00:00";
@@ -161,19 +161,19 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
 
   String _getTime(Duration duration) {
     // For HH:mm:ss format
-    if (widget.textFormat == CountdownTextFormat.HH_MM_SS) {
+    if (widget.textFormat == TextFormat.HH_MM_SS) {
       return '${duration.inHours.toString().padLeft(2, '0')}:${(duration.inMinutes % 60).toString().padLeft(2, '0')}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
     }
     // For mm:ss format
-    else if (widget.textFormat == CountdownTextFormat.MM_SS) {
+    else if (widget.textFormat == TextFormat.MM_SS) {
       return '${(duration.inMinutes % 60).toString().padLeft(2, '0')}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
     }
     // For ss format
-    else if (widget.textFormat == CountdownTextFormat.SS) {
+    else if (widget.textFormat == TextFormat.SS) {
       return '${(duration.inSeconds).toString().padLeft(2, '0')}';
     }
     // For s format
-    else if (widget.textFormat == CountdownTextFormat.S) {
+    else if (widget.textFormat == TextFormat.S) {
       return '${(duration.inSeconds)}';
     } else {
       // Default format
@@ -343,9 +343,4 @@ class CountDownController {
   }
 }
 
-class CountdownTextFormat {
-  static const String HH_MM_SS = "HH:mm:ss";
-  static const String MM_SS = "mm:ss";
-  static const String SS = "ss";
-  static const String S = "s";
-}
+enum TextFormat { HH_MM_SS, MM_SS, SS, S }
