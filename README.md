@@ -49,6 +49,6 @@ If you need to make a timer application with a fancy neon effect then this packa
 
 ### Preview
 
-![video](https://github.com/yassinedevop/neon_circular_timer/blob/master/preview.mp4 "video preview")
+![alt text](https://github.com/yassinedevop/neon_circular_timer/blob/master/preview.mp4 "video preview")
 
 
