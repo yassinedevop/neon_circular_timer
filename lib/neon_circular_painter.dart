@@ -6,8 +6,8 @@ class CustomTimerPainter extends CustomPainter {
       {this.animation,
       this.neumorphicEffect = true,
       this.backgroundColor,
-      this.fillColor,
-      this.fillGradient,
+      this.innerFillColor,
+      this.innerFillGradient,
       this.neonColor,
       this.neonGradient,
       this.strokeWidth,
@@ -15,16 +15,15 @@ class CustomTimerPainter extends CustomPainter {
       required this.neon,
       this.outerStrokeColor,
       this.outerStrokeGradient})
-      : assert((neumorphicEffect && backgroundColor != null)),
-        super(repaint: animation);
+      : super(repaint: animation);
 
   final double? neon;
   final Animation<double>? animation;
   final bool neumorphicEffect;
-  final Color? fillColor, neonColor, outerStrokeColor, backgroundColor;
+  final Color? innerFillColor, neonColor, outerStrokeColor, backgroundColor;
   final double? strokeWidth;
   final StrokeCap? strokeCap;
-  final Gradient? fillGradient, neonGradient, outerStrokeGradient;
+  final Gradient? innerFillGradient, neonGradient, outerStrokeGradient;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -50,7 +49,7 @@ class CustomTimerPainter extends CustomPainter {
         ..strokeCap = strokeCap!
         ..style = PaintingStyle.stroke;
       innerPaint
-        ..color = fillColor!
+        ..color = innerFillColor!
         ..strokeWidth = strokeWidth!
         ..strokeCap = strokeCap!
         ..style = PaintingStyle.stroke
@@ -70,13 +69,13 @@ class CustomTimerPainter extends CustomPainter {
 
     double progress = (animation!.value) * 2 * math.pi;
 
-    if (fillGradient != null) {
+    if (innerFillGradient != null) {
       final rect = Rect.fromCircle(
           center: size.center(Offset.zero), radius: size.width / 2);
-      strokePaint..shader = fillGradient!.createShader(rect);
+      strokePaint..shader = innerFillGradient!.createShader(rect);
     } else {
       strokePaint..shader = null;
-      strokePaint.color = fillColor!;
+      strokePaint.color = innerFillColor!;
     }
     Path path = Path();
 
@@ -99,6 +98,6 @@ class CustomTimerPainter extends CustomPainter {
   bool shouldRepaint(CustomTimerPainter old) {
     return animation!.value != old.animation!.value ||
         neonColor != old.neonColor ||
-        fillColor != old.fillColor;
+        innerFillColor != old.innerFillColor;
   }
 }

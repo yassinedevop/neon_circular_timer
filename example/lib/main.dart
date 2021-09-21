@@ -28,12 +28,10 @@ class MyApp extends StatelessWidget {
                       controller: controller,
                       duration: 20,
                       strokeWidth: 10,
-                      textFormat: TextFormat.MM_SS,
                       isTimerTextShown: true,
                       neumorphicEffect: true,
-                      textStyle: Theme.of(context).textTheme.headline3,
                       outerStrokeColor: Colors.grey.shade100,
-                      fillGradient: LinearGradient(colors: [
+                      innerFillGradient: LinearGradient(colors: [
                         Colors.greenAccent.shade200,
                         Colors.blueAccent.shade400
                       ]),
@@ -42,7 +40,7 @@ class MyApp extends StatelessWidget {
                         Colors.blueAccent.shade400
                       ]),
                       strokeCap: StrokeCap.round,
-                      fillColor: Colors.black12,
+                      innerFillColor: Colors.black12,
                       backgroudColor: Colors.grey.shade100,
                       neonColor: Colors.blue.shade900),
                   Padding(

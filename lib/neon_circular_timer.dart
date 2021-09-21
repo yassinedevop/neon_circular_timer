@@ -12,10 +12,10 @@ class NeonCircularTimer extends StatefulWidget {
   final Key? key;
 
   /// Filling Color for Countdown Widget.
-  final Color fillColor;
+  final Color innerFillColor;
 
   /// Filling Gradient for Countdown Widget.
-  final Gradient? fillGradient;
+  final Gradient? innerFillGradient;
 
   /// Filling Color for Countdown circle.
   final Color? backgroudColor;
@@ -27,7 +27,7 @@ class NeonCircularTimer extends StatefulWidget {
   final Gradient? neonGradient;
 
   /// Background Color for Countdown Widget.
-  final Color outerStrokeColor;
+  final Color? outerStrokeColor;
 
   /// Background Gradient for Countdown Widget.
   final Gradient? outerStrokeGradient;
@@ -80,12 +80,13 @@ class NeonCircularTimer extends StatefulWidget {
   NeonCircularTimer(
       {required this.width,
       required this.duration,
-      required this.fillColor,
-      required this.neonColor,
-      required this.outerStrokeColor,
-      required this.backgroudColor,
+      required this.controller,
+      this.innerFillColor = Colors.black12,
+      this.outerStrokeColor = Colors.white,
+      this.backgroudColor = Colors.white54,
+      this.neonColor = Colors.white54,
       this.neon = 4,
-      this.fillGradient,
+      this.innerFillGradient,
       this.neonGradient,
       this.outerStrokeGradient,
       this.initialDuration = 0,
@@ -93,14 +94,13 @@ class NeonCircularTimer extends StatefulWidget {
       this.isReverseAnimation = false,
       this.onComplete,
       this.onStart,
-      this.strokeWidth = 5.0,
-      this.strokeCap = StrokeCap.butt,
+      this.strokeWidth = 10.0,
+      this.strokeCap = StrokeCap.round,
       this.textStyle,
       this.key,
       this.isTimerTextShown = true,
       this.autoStart = true,
-      this.textFormat,
-      this.controller,
+      this.textFormat = TextFormat.MM_SS,
       this.neumorphicEffect = true})
       : super(key: key);
 
@@ -129,6 +129,9 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
       return _getTime(duration);
     }
   }
+
+  int get currentTime =>
+      (_controller!.duration! * _controller!.value).inSeconds;
 
   void _setAnimation() {
     if (widget.autoStart) {
@@ -244,51 +247,51 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: widget.width,
-      child: AnimatedBuilder(
-          animation: _controller!,
-          builder: (context, child) {
-            return Align(
-              child: AspectRatio(
-                aspectRatio: 1.0,
-                child: Stack(
-                  children: <Widget>[
-                    Positioned.fill(
-                      child: CustomPaint(
-                        painter: CustomTimerPainter(
-                            neumorphicEffect: widget.neumorphicEffect,
-                            backgroundColor: widget.backgroudColor,
-                            animation: _countDownAnimation ?? _controller,
-                            fillColor: widget.fillColor,
-                            fillGradient: widget.fillGradient,
-                            neonColor: widget.neonColor,
-                            neonGradient: widget.neonGradient,
-                            strokeWidth: widget.strokeWidth,
-                            strokeCap: widget.strokeCap,
-                            outerStrokeColor: widget.outerStrokeColor,
-                            outerStrokeGradient: widget.outerStrokeGradient,
-                            neon: widget.neon),
+    return Center(
+      child: Container(
+        width: widget.width,
+        height: widget.width,
+        child: AnimatedBuilder(
+            animation: _controller!,
+            builder: (context, child) {
+              return Align(
+                child: AspectRatio(
+                  aspectRatio: 1.0,
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned.fill(
+                        child: CustomPaint(
+                          painter: CustomTimerPainter(
+                              neumorphicEffect: widget.neumorphicEffect,
+                              backgroundColor: widget.backgroudColor,
+                              animation: _countDownAnimation ?? _controller,
+                              innerFillColor: widget.innerFillColor,
+                              innerFillGradient: widget.innerFillGradient,
+                              neonColor: widget.neonColor,
+                              neonGradient: widget.neonGradient,
+                              strokeWidth: widget.strokeWidth,
+                              strokeCap: widget.strokeCap,
+                              outerStrokeColor: widget.outerStrokeColor,
+                              outerStrokeGradient: widget.outerStrokeGradient,
+                              neon: widget.neon),
+                        ),
                       ),
-                    ),
-                    widget.isTimerTextShown
-                        ? Align(
-                            alignment: FractionalOffset.center,
-                            child: Text(
-                              time,
-                              style: widget.textStyle ??
-                                  TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.black,
-                                  ),
-                            ),
-                          )
-                        : Container(),
-                  ],
+                      widget.isTimerTextShown
+                          ? Align(
+                              alignment: FractionalOffset.center,
+                              child: Text(
+                                time,
+                                style: widget.textStyle ??
+                                    Theme.of(context).textTheme.headline3,
+                              ),
+                            )
+                          : Container(),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+      ),
     );
   }
 
@@ -344,11 +347,17 @@ class CountDownController {
     }
   }
 
-  /// This Method returns the **Current Time** of Countdown Timer i.e
-  /// Time Used in terms of **Forward Countdown** and Time Left in terms of **Reverse Countdown**
+  /// This Method returns the **Current Time** of Countdown Timer
+  /// Formated into the selected [TextFormat]
   String getTime() {
     return _state
         ._getTime(_state._controller!.duration! * _state._controller!.value);
+  }
+
+  /// This Method returns the **Current Time** of Countdown Timer
+  /// in seconds
+  int getTimeInSeconds() {
+    return _state.currentTime;
   }
 }
 
