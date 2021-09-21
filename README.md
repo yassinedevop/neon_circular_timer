@@ -4,7 +4,7 @@ Make a timer application with a fancy neon effect and beautiful UI
 
 `v0.0.3 and above` now the timer has also a neumorphic border
 
-### Preview of the example
+### Preview of example
 
 ![example preview](https://media.giphy.com/media/rM45TxvYlQjvdJ7AG1/giphy.gif?cid=790b7611c217e41209a0375380b68c8b1b72bf91151b56f0&rid=giphy.gif "example Preview")
 
@@ -33,7 +33,11 @@ Make a timer application with a fancy neon effect and beautiful UI
                     neonColor: Colors.blue.shade900),
 </pre>
 
-#### use `neumorphicEffect` to show or hide the neumorphic border
+### use `neumorphicEffect` to show or hide the neumorphic border
+
+### use `isTimerTextShown` to show or hide the text
+
+#### with `neumorphicEffect` is `true` and `isTimerTextShown` is `false` 
 
 <pre>
 
@@ -60,9 +64,9 @@ Make a timer application with a fancy neon effect and beautiful UI
                     neonColor: Colors.blue.shade900),
 </pre>
 
-[neum no text](https://media.giphy.com/media/q5KiSQq0k2lWCtxOt5/giphy.gif?cid=790b76116afb344ed52321d56e53f96b7e911a2274741577&rid=giphy.gif "with neumorphic but no text")
+![neum no text](https://media.giphy.com/media/q5KiSQq0k2lWCtxOt5/giphy.gif?cid=790b76116afb344ed52321d56e53f96b7e911a2274741577&rid=giphy.gif "with neumorphic but no text")
 
-#### use `isTimerTextShown` to show or hide the text
+#### with `neumorphicEffect` is `false` and `isTimerTextShown` is `false` 
 
 <pre>
   NeonCircularTimer(
@@ -86,7 +90,7 @@ Make a timer application with a fancy neon effect and beautiful UI
                     neonColor: Colors.blue.shade900),
 </pre>
 
-[no txt nor neum](https://media.giphy.com/media/MOXJxXZsLpxoLdak2u/giphy.gif?cid=790b761146635c380274d3241d0871c3562c78316abe2348&rid=giphy.gif "preview with no text nor neumorphic border")
+![no txt nor neum](https://media.giphy.com/media/MOXJxXZsLpxoLdak2u/giphy.gif?cid=790b761146635c380274d3241d0871c3562c78316abe2348&rid=giphy.gif "preview with no text nor neumorphic border")
 
 
 ## Parameters
@@ -115,9 +119,3 @@ Make a timer application with a fancy neon effect and beautiful UI
 |`autoStart`|`bool`|true|*Handles the timer start.*|
 |`onStart`|`VoidCallback`|null|*This Callback will execute when the Countdown Starts.*|
 |`onComplete`|`VoidCallback`|null|*This Callback will execute when the Countdown Ends.*|
-
-
-
-
-
-
