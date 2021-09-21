@@ -12,11 +12,13 @@ class CustomTimerPainter extends CustomPainter {
       this.neonGradient,
       this.strokeWidth,
       this.strokeCap,
+      required this.neon,
       this.outerStrokeColor,
       this.outerStrokeGradient})
       : assert((neumorphicEffect && backgroundColor != null)),
         super(repaint: animation);
 
+  final double? neon;
   final Animation<double>? animation;
   final bool neumorphicEffect;
   final Color? fillColor, neonColor, outerStrokeColor, backgroundColor;
@@ -30,7 +32,7 @@ class CustomTimerPainter extends CustomPainter {
       ..color = neonColor!
       ..strokeWidth = strokeWidth!
       ..strokeCap = strokeCap!
-      ..maskFilter = MaskFilter.blur(BlurStyle.outer, 5)
+      ..maskFilter = MaskFilter.blur(BlurStyle.outer, neon!)
       ..style = PaintingStyle.stroke;
     Paint strokePaint = Paint()
       ..color = neonColor!.withOpacity(0.8)

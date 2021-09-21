@@ -5,6 +5,9 @@ import 'neon_circular_painter.dart';
 
 /// Create a Circular Countdown Timer.
 class NeonCircularTimer extends StatefulWidget {
+  /// the degree of neon effect
+  final double neon;
+
   /// Key for Countdown Timer.
   final Key? key;
 
@@ -81,6 +84,7 @@ class NeonCircularTimer extends StatefulWidget {
       required this.neonColor,
       required this.outerStrokeColor,
       required this.backgroudColor,
+      this.neon = 4,
       this.fillGradient,
       this.neonGradient,
       this.outerStrokeGradient,
@@ -263,7 +267,8 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
                             strokeWidth: widget.strokeWidth,
                             strokeCap: widget.strokeCap,
                             outerStrokeColor: widget.outerStrokeColor,
-                            outerStrokeGradient: widget.outerStrokeGradient),
+                            outerStrokeGradient: widget.outerStrokeGradient,
+                            neon: widget.neon),
                       ),
                     ),
                     widget.isTimerTextShown
