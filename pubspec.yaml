@@ -1,6 +1,6 @@
 name: neon_circular_timer
 description: "A package that helps you to build a timer quickly with a beautiful UI, it's highly customizable you can change the color,the thickness of the timer,the clock text style."
-version: 0.0.4
+version: 0.0.5
 homepage: "https://github.com/yassinedevop/neon_circular_timer"
 
 environment:

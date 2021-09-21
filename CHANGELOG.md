@@ -6,3 +6,5 @@ null safety supported
 neumorphic effect added
 ## [0.0.4] - 21/09/2021
 clearer example provided - better documentation
+## [0.0.5] - 21/09/2021
+variable called neon added to control the neon effect
