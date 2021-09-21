@@ -14,8 +14,7 @@ class CustomTimerPainter extends CustomPainter {
       this.strokeCap,
       this.outerStrokeColor,
       this.outerStrokeGradient})
-      : assert((neumorphicEffect && backgroundColor != null) ||
-            !neumorphicEffect && backgroundColor == null),
+      : assert((neumorphicEffect && backgroundColor != null)),
         super(repaint: animation);
 
   final Animation<double>? animation;

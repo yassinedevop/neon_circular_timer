@@ -80,6 +80,7 @@ class NeonCircularTimer extends StatefulWidget {
       required this.fillColor,
       required this.neonColor,
       required this.outerStrokeColor,
+      required this.backgroudColor,
       this.fillGradient,
       this.neonGradient,
       this.outerStrokeGradient,
@@ -96,7 +97,6 @@ class NeonCircularTimer extends StatefulWidget {
       this.autoStart = true,
       this.textFormat,
       this.controller,
-      this.backgroudColor,
       this.neumorphicEffect = true})
       : super(key: key);
 

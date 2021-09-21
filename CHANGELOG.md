@@ -4,3 +4,5 @@ initial release
 null safety supported
 ## [0.0.3] - 20/09/2021
 neumorphic effect added
+## [0.0.4] - 21/09/2021
+clearer example provided - better documentation

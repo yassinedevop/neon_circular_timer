@@ -1,28 +1,93 @@
 # neon_circular_timer
 
-If you need to make a timer application with a fancy neon effect then this package is for you
+Make a timer application with a fancy neon effect and beautiful UI
 
+`v0.0.3 and above` now the timer has also a neumorphic border
 
+### Preview of the example
 
+![example preview](https://media.giphy.com/media/rM45TxvYlQjvdJ7AG1/giphy.gif?cid=790b7611c217e41209a0375380b68c8b1b72bf91151b56f0&rid=giphy.gif "example Preview")
 
 ### Usage
+<pre>
+  NeonCircularTimer(
+                width: 200,
+                    duration: 20,
+                    strokeWidth: 10,
+                    textFormat: TextFormat.MM_SS,
+                    isTimerTextShown: true,
+                    neumorphicEffect: true,
+                    textStyle: Theme.of(context).textTheme.headline3,
+                    outerStrokeColor: Colors.grey.shade100,
+                    fillGradient: LinearGradient(colors: [
+                      Colors.greenAccent.shade200,
+                      Colors.blueAccent.shade400
+                    ]),
+                    neonGradient: LinearGradient(colors: [
+                      Colors.greenAccent.shade200,
+                      Colors.blueAccent.shade400
+                    ]),
+                    strokeCap: StrokeCap.round,
+                    fillColor: Colors.black12,
+                    backgroudColor: Colors.grey.shade100,
+                    neonColor: Colors.blue.shade900),
+</pre>
+
+#### use `neumorphicEffect` to show or hide the neumorphic border
+
+<pre>
+
+  NeonCircularTimer(
+                width: 200,
+                    duration: 20,
+                    strokeWidth: 10,
+                    textFormat: TextFormat.MM_SS,
+                    isTimerTextShown: false,
+                    neumorphicEffect: true,
+                    textStyle: Theme.of(context).textTheme.headline3,
+                    outerStrokeColor: Colors.grey.shade100,
+                    fillGradient: LinearGradient(colors: [
+                      Colors.greenAccent.shade200,
+                      Colors.blueAccent.shade400
+                    ]),
+                    neonGradient: LinearGradient(colors: [
+                      Colors.greenAccent.shade200,
+                      Colors.blueAccent.shade400
+                    ]),
+                    strokeCap: StrokeCap.round,
+                    fillColor: Colors.black12,
+                    backgroudColor: Colors.grey.shade100,
+                    neonColor: Colors.blue.shade900),
+</pre>
+
+[neum no text](https://media.giphy.com/media/q5KiSQq0k2lWCtxOt5/giphy.gif?cid=790b76116afb344ed52321d56e53f96b7e911a2274741577&rid=giphy.gif "with neumorphic but no text")
+
+#### use `isTimerTextShown` to show or hide the text
 
 <pre>
   NeonCircularTimer(
                 width: 200,
-                duration: 10,
-                strokeWidth: 10,
-                outerStrokeColor: Colors.grey.shade100,
-                fillGradient: LinearGradient(colors: [
-                  Colors.greenAccent.shade200,
-                  Colors.blueAccent.shade400
-                ]),
-                neonGradient: LinearGradient(colors: [
-                  Colors.greenAccent.shade200,
-                  Colors.blueAccent.shade400
-                ]),
-                strokeCap: StrokeCap.round ),
+                    duration: 20,
+                    strokeWidth: 10,
+                    textFormat: TextFormat.MM_SS,
+                    isTimerTextShown: false,
+                    neumorphicEffect: false,
+                    outerStrokeColor: Colors.grey.shade100,
+                    fillGradient: LinearGradient(colors: [
+                      Colors.greenAccent.shade200,
+                      Colors.blueAccent.shade400
+                    ]),
+                    neonGradient: LinearGradient(colors: [
+                      Colors.greenAccent.shade200,
+                      Colors.blueAccent.shade400
+                    ]),
+                    strokeCap: StrokeCap.round,
+                    fillColor: Colors.black12,
+                    neonColor: Colors.blue.shade900),
 </pre>
+
+[no txt nor neum](https://media.giphy.com/media/MOXJxXZsLpxoLdak2u/giphy.gif?cid=790b761146635c380274d3241d0871c3562c78316abe2348&rid=giphy.gif "preview with no text nor neumorphic border")
+
 
 ## Parameters
 |Name|Type|Default Value|Description
@@ -34,9 +99,11 @@ If you need to make a timer application with a fancy neon effect then this packa
 |`width`|`double`|null|*Width of the rectangle that surrounds the circle ( Diameter of the Countdown Timer).*|
 |`neonColor`|`Color`|null|*neon Color for Countdown Widget.*|
 |`neonGradient`|`Gradient`|null|*neon Gradient for Countdown Widget. Note that ringColor will not be effective if gradient is provided.*|
+|`neumorphicEffect`|`bool`|true|*show neumorphic border*|
 |`fillColor`|`Color`|null|*Filling Color for Countdown Widget.*|
 |`fillGradient`|`Gradient`|null|*Filling Gradient for Countdown Widget. Note that fillColor will not be effective if gradient is provided.*|
 |`outerStrokeColor`|`Color`|null|*border Color for Countdown Widget.*|
+|`backgroundColor`|`Color`|null|*must be provided if you choose to use neumorphic effect .*|
 |`outerStrokeGradient`|`Gradient`|null|*border Gradient for Countdown Widget. Note that backgroundColor will not be effective if gradient is provided.*|
 |`strokeWidth`|`double`|5.0|*Border Thickness of the Countdown Ring.*|
 |`strokeCap`|`StrokeCap`|StrokeCap.butt|*Begin and end contours with a flat edge and no extension.*|
@@ -49,9 +116,8 @@ If you need to make a timer application with a fancy neon effect then this packa
 |`onStart`|`VoidCallback`|null|*This Callback will execute when the Countdown Starts.*|
 |`onComplete`|`VoidCallback`|null|*This Callback will execute when the Countdown Ends.*|
 
-### Preview
 
-![demo](https://media.giphy.com/media/MqRrJ8g2wjq15vaVil/giphy.gif?cid=790b7611a2d5ea480f7d8d4609f9fc16d42856dbd2107110&rid=giphy.gif "demo")
+
 
 
 
