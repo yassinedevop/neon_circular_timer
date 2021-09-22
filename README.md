@@ -91,17 +91,22 @@ With `neumorphicEffect` is `true` and `isTimerTextShown` is `false`
 
 ## About the Controller
 to get the time in seconds use :
+
 <pre>
 controller.getCurrentTimeInSeconds();
-<pre>
+</pre>
+
 to get the time formated into the selected TextFormat use:
+
 <pre>
 controller.getTime();
-<pre>
+</pre>
+
 to control the timer use :
+
 <pre>
 controller.restart(); // to reset the timer
 controller.start(); // to start the timer from 0
 controller.pause(); // to pause the timer
 controller.resume(); // to continue from the value where the timer stopped
-<pre>
+</pre>
