@@ -18,7 +18,7 @@ class NeonCircularTimer extends StatefulWidget {
   final Gradient? innerFillGradient;
 
   /// Filling Color for Countdown circle.
-  final Color? backgroudColor;
+  final Color? backgroundColor;
 
   /// Ring Color for Countdown Widget.
   final Color? neonColor;
