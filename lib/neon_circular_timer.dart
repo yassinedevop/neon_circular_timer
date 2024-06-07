@@ -83,7 +83,7 @@ class NeonCircularTimer extends StatefulWidget {
       required this.controller,
       this.innerFillColor = Colors.black12,
       this.outerStrokeColor = Colors.white,
-      this.backgroudColor = Colors.white54,
+      this.backgroundColor = Colors.white54,
       this.neonColor = Colors.white54,
       this.neon = 4,
       this.innerFillGradient,
@@ -263,7 +263,7 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
                         child: CustomPaint(
                           painter: CustomTimerPainter(
                               neumorphicEffect: widget.neumorphicEffect,
-                              backgroundColor: widget.backgroudColor,
+                              backgroundColor: widget.backgroundColor,
                               animation: _countDownAnimation ?? _controller,
                               innerFillColor: widget.innerFillColor,
                               innerFillGradient: widget.innerFillGradient,
@@ -282,7 +282,7 @@ class NeonCircularTimerState extends State<NeonCircularTimer>
                               child: Text(
                                 time,
                                 style: widget.textStyle ??
-                                    Theme.of(context).textTheme.headline3,
+                                    Theme.of(context).textTheme.displaySmall,
                               ),
                             )
                           : Container(),
